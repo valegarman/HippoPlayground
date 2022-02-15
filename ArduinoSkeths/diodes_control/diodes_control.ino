@@ -61,6 +61,7 @@ void loop() {
             pulsesCounter++;
             }
         }
+      modeOfOperation = 3;
     }
   } else if (modeOfOperation == 2){
     if (digitalRead(activationPin) == HIGH){ // if activated
