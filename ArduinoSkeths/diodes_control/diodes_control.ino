@@ -6,9 +6,11 @@ int delayBetweenPulsesFactor = 14; // factor that multiply pulses duration to co
 int randomness = 6; // factor that multiply pulses duraction to compute randomness
 int pulseDuration[] = {5, 20, 50, 100}; // arary of duractions in ms, for example {5 20 50 100}
 int nPulsesDuration = 4;
-int pulsesNumber = 500;
+int pulsesNumber = 5;
 boolean continousStimulation = true;// stimulation no dependent of activation pin
 int pulseChoiceForStimulation = 1; // array position of the pulse that will be use during triggered stimulation
+int shortFactor = 3; // if pulses less than 10ms, multiply delayBetweenPulsesFactor by this
+int runChirp = 20; // run chirp protocol. Scalar will indicate number of repetition per pulse.
 
 // Pins
 const int diodesPin = 2;
@@ -21,6 +23,8 @@ int pulse;
 int pulsesCounter;
 int delayFrom;
 int delayTo;
+int activeShortFactor;
+int chirpDuration;
 
 void setup() {
   pinMode(LED_BUILTIN, OUTPUT);
@@ -43,9 +47,16 @@ void loop() {
       for (int i = 0; i < nPulsesDuration; ++i){
         delay(1000);
         pulse = pulseDuration[i];
+
+        if (pulse < 10){ // if pulses less than 10ms, multiply delayBetweenPulsesFactor by 3
+          activeShortFactor = shortFactor;
+          } else {
+          activeShortFactor = 1; 
+          }
+        
         pulsesCounter = 0;
-        delayFrom = (delayBetweenPulsesFactor - randomness) * pulse;
-        delayTo = (delayBetweenPulsesFactor + randomness) * pulse;
+        delayFrom = (delayBetweenPulsesFactor - randomness) * pulse * activeShortFactor;
+        delayTo = (delayBetweenPulsesFactor + randomness) * pulse * activeShortFactor;
           while (pulsesCounter < pulsesNumber){
             digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on   
             digitalWrite(diodesPin, HIGH);   // turn the diodes on
@@ -61,6 +72,23 @@ void loop() {
             pulsesCounter++;
             }
         }
+      delay(2000);
+      if (runChirp > 0){
+        while (chirpDuration < 500){
+          chirpDuration = chirpDuration + 5;
+          for (int j = 0; j < runChirp; j++){
+            digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on   
+            digitalWrite(diodesPin, HIGH);   // turn the diodes on
+
+            delay(chirpDuration);
+
+            digitalWrite(LED_BUILTIN, LOW);   // turn the LED on   
+            digitalWrite(diodesPin, LOW);   // turn the diodes on
+
+            delay(chirpDuration);
+          }
+        }
+      }
       modeOfOperation = 3;
     }
   } else if (modeOfOperation == 2){
