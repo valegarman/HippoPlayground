@@ -75,6 +75,7 @@ void loop() {
               diodeAState = LOW;  // Turn it off
               previousMillisA = currentMillis;  // Remember the time
               digitalWrite(diodesPinA, diodeAState);  // Update the actual LED
+              digitalWrite(LED_BUILTIN, LOW);   // turn the LED on   
               delayBetweenPulsesA = random(delayFrom,delayTo); // random number from 1 to 12
             }
             else if ((diodeAState == LOW) && (currentMillis - previousMillisA >= delayBetweenPulsesA))
@@ -82,6 +83,7 @@ void loop() {
               diodeAState = HIGH;  // turn it on
               previousMillisA = currentMillis;   // Remember the time
               digitalWrite(diodesPinA, diodeAState);    // Update the actual LED
+              digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on   
               pulsesCounter++;
             }
             else if((diodeBState == HIGH) && (currentMillis - previousMillisB >= pulse))
