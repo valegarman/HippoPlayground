@@ -6,9 +6,9 @@
 int modeOfOperation = 0; // 1 is continuous-triggered stimulation with one pulse duration for 2 diodes run independently, 2 is continuous-triggered stimulation with only one pulse duration and 3 is tagging
 int delayBetweenPulsesFactor = 14; // factor that multiply pulses duration to compute delay
 int randomness = 6; // factor that multiply pulses duraction to compute randomness
-int pulseDuration[] = {5, 20, 50, 100}; // arary of duractions in ms, for example {5 20 50 100}
-int nPulsesDuration = 4;
-int pulsesNumber = 500;
+int pulseDuration[] = {5, 20, 50, 100, 400, 800}; // arary of duractions in ms, for example {5 20 50 100}
+int nPulsesDuration = 6;
+int pulsesNumber[] = {500, 500, 500, 500, 100, 100};
 boolean continousStimulation = true;// stimulation no dependent of activation pin
 int pulseChoiceForStimulation = 2; // array position of the pulse that will be use during triggered stimulation
 int shortFactor = 3; // if pulses less than 10ms, multiply delayBetweenPulsesFactor by this
@@ -44,6 +44,7 @@ int stimBlock = 0; // 0 is no stimulating
 int delayBetweenPulsesA;
 int delayBetweenPulsesB;
 int pulse;
+int pulseNumber;
 int pulsesCounter;
 int delayFrom;
 int delayTo;
@@ -139,6 +140,9 @@ void loop() {
         digitalWrite(diodesPinB, LOW);   // turn the diodes off
         delay(1000);
         pulse = pulseDuration[i];
+        pulseNumber = pulsesNumber[i];
+        
+        
 
         if (pulse < 10){ // if pulses less than 10ms, multiply delayBetweenPulsesFactor by 3
           activeShortFactor = shortFactor;
@@ -149,7 +153,7 @@ void loop() {
         pulsesCounter = 0;
         delayFrom = (delayBetweenPulsesFactor - randomness) * pulse * activeShortFactor;
         delayTo = (delayBetweenPulsesFactor + randomness) * pulse * activeShortFactor;
-          while (pulsesCounter < pulsesNumber){
+          while (pulsesCounter < pulseNumber){
             // Use millis() instead of delay
             unsigned long currentMillis = millis();
 
@@ -202,6 +206,7 @@ void loop() {
           }
         }
       }
+      chirpDuration = 0;
       // chirp b
       delay(2000);
       if (runChirp > 0){
@@ -220,6 +225,7 @@ void loop() {
           }
         }
       }
+      chirpDuration = 0;
       // chirp A and B
       delay(2000);
       if (runChirp > 0){
