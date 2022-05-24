@@ -8,7 +8,7 @@ int delayBetweenPulsesFactor = 14; // factor that multiply pulses duration to co
 int randomness = 6; // factor that multiply pulses duraction to compute randomness
 int pulseDuration[] = {5, 20, 50, 100, 400, 800}; // arary of duractions in ms, for example {5 20 50 100}
 int nPulsesDuration = 6;
-int pulsesNumber = {500, 500, 500, 500, 250, 250};
+int pulsesNumber[] = {500, 500, 500, 500, 100, 100};
 boolean continousStimulation = true;// stimulation no dependent of activation pin
 int pulseChoiceForStimulation = 2; // array position of the pulse that will be use during triggered stimulation
 int shortFactor = 3; // if pulses less than 10ms, multiply delayBetweenPulsesFactor by this
@@ -206,6 +206,7 @@ void loop() {
           }
         }
       }
+      chirpDuration = 0;
       // chirp b
       delay(2000);
       if (runChirp > 0){
@@ -224,6 +225,7 @@ void loop() {
           }
         }
       }
+      chirpDuration = 0;
       // chirp A and B
       delay(2000);
       if (runChirp > 0){
