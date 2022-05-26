@@ -1,0 +1,152 @@
+{
+  "numChannels": 12,
+  "logLevel": 1,
+  "quantizeInput": true,
+  "disableDigitalInput": false,
+  "waitForPatternToFinishBeforeStopping": true,
+  "doMode": 0,
+  "channelSelectorModels": [
+    {
+      "GUID": "855c1508-1acc-4202-a76a-4644c4146cd5",
+      "name": "S1L1",
+      "channelNumber": 3,
+      "DIChannelNumber": 0,
+      "DOChannelNumber": 0,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "ca7bf9ec-3c34-4557-9487-aa3ad0a9996b",
+      "name": "S1L2",
+      "channelNumber": 4,
+      "DIChannelNumber": 1,
+      "DOChannelNumber": 1,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "d2929fd2-6288-462d-84d6-4f3ce25ef4ec",
+      "name": "S1L3",
+      "channelNumber": 5,
+      "DIChannelNumber": 2,
+      "DOChannelNumber": 2,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "ba8aa67d-6beb-40c6-8b1c-9fd7d94f5bf2",
+      "name": "S2L1",
+      "channelNumber": 0,
+      "DIChannelNumber": 3,
+      "DOChannelNumber": 3,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "a8f79a5c-f8b4-4a0c-87d8-bb641a38cd46",
+      "name": "S2L2",
+      "channelNumber": 1,
+      "DIChannelNumber": 4,
+      "DOChannelNumber": 4,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "0e9fe97a-488f-49de-8a14-0ffe9edf03f1",
+      "name": "S2L3",
+      "channelNumber": 2,
+      "DIChannelNumber": 5,
+      "DOChannelNumber": 5,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "9b29ca92-1cd2-4e04-b443-99023af42938",
+      "name": "S3L1",
+      "channelNumber": 9,
+      "DIChannelNumber": 6,
+      "DOChannelNumber": 6,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "0ec28c62-6825-422a-ae6d-019d91af8aa6",
+      "name": "S3L2",
+      "channelNumber": 10,
+      "DIChannelNumber": 7,
+      "DOChannelNumber": 7,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "c77ad1c3-84ff-432d-a03e-572ff8f12e35",
+      "name": "S3L3",
+      "channelNumber": 11,
+      "DIChannelNumber": 8,
+      "DOChannelNumber": 8,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "3a815213-8abc-4663-ae87-36965ae588ca",
+      "name": "S4L1",
+      "channelNumber": 6,
+      "DIChannelNumber": 9,
+      "DOChannelNumber": 9,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "069e4864-3188-4a78-81ab-edfeba803c1d",
+      "name": "S4L2",
+      "channelNumber": 7,
+      "DIChannelNumber": 10,
+      "DOChannelNumber": 10,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "80d50c3c-97bb-48e5-bd5a-2534f23b0fc0",
+      "name": "S4L3",
+      "channelNumber": 8,
+      "DIChannelNumber": 11,
+      "DOChannelNumber": 11,
+      "selectedPatternGUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "controlGroup": -1
+    }
+  ],
+  "patterns": [
+    {
+      "patternPrimitiveList": [
+        {
+          "GUID": "4042c490-f1dd-4ad0-98a0-1742ae372a35",
+          "type": 1,
+          "startCurrentInMicroAmps": 0,
+          "endCurrentInMicroAmps": 40,
+          "durationInMilliseconds": 1,
+          "repetitions": 1
+        },
+        {
+          "GUID": "efe828a0-517f-46d1-bb44-b70b52161888",
+          "type": 0,
+          "startCurrentInMicroAmps": 40,
+          "endCurrentInMicroAmps": 0,
+          "durationInMilliseconds": 18,
+          "repetitions": 1
+        },
+        {
+          "GUID": "5a10b49a-bb46-4673-9c31-9bd2797aeeb1",
+          "type": 1,
+          "startCurrentInMicroAmps": 40,
+          "endCurrentInMicroAmps": 0,
+          "durationInMilliseconds": 1,
+          "repetitions": 1
+        }
+      ],
+      "repetitions": 1,
+      "delayInMilliseconds": 20,
+      "GUID": "461923f6-7f77-4a80-ad5b-c82f266326c1",
+      "patternName": "Pattern 1"
+    }
+  ]
+}
