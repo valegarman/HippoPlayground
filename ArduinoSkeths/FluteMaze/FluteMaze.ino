@@ -18,6 +18,8 @@ int caudal5 = 80; // time solenoid is open, in ms
 int caudal6 = 80; // time solenoid is open, in ms
 int caudal7 = 80; // time solenoid is open, in ms
 
+int phase = 0; // trainning is 0, test is 1, probe is 2;
+
 /* ==================== SELECT REWARDED POSITIONS =======================*/
 // pos1 and pos7 are at both extremes of the maze. They are always rewarded
 // and their activation starts a new forward (pos1) or reverse (pos2) trial
@@ -32,6 +34,9 @@ int pos3_reverse = 0;
 int pos4_reverse = 0;
 int pos5_reverse = 0;
 int pos6_reverse = 0;
+
+int pos1_forward = 0;
+int pos7_forward = 0;
 
 /* ==================== PINS ============================================*/
 // Solenoid Pins
@@ -89,11 +94,13 @@ int rewardsFound = 0;
 long int timeCounter = 0;
 int trialNumber = 0;
 
+int state_pos1_forward = pos1_forward;
 int state_pos2_forward = pos2_forward;
 int state_pos3_forward = pos3_forward;
 int state_pos4_forward = pos4_forward;
 int state_pos5_forward = pos5_forward;
 int state_pos6_forward = pos6_forward;
+int state_pos7_forward = pos7_forward;
 
 int state_pos2_reverse = pos2_reverse;
 int state_pos3_reverse = pos3_reverse;
@@ -162,168 +169,286 @@ void setup() {
 }
 
 void loop() {
-  // read (and write into Intan) licking behaviour
-  lickmeterState1 = digitalRead(lickPin1);
-  lickmeterState2 = digitalRead(lickPin2);
-  lickmeterState3 = digitalRead(lickPin3);
-  lickmeterState4 = digitalRead(lickPin4);
-  lickmeterState5 = digitalRead(lickPin5);
-  lickmeterState6 = digitalRead(lickPin6);
-  lickmeterState7 = digitalRead(lickPin7);  
-
-  digitalWrite(lickTTLPin1, lickmeterState1);
-  digitalWrite(lickTTLPin2, lickmeterState2);
-  digitalWrite(lickTTLPin3, lickmeterState3);
-  digitalWrite(lickTTLPin4, lickmeterState4);
-  digitalWrite(lickTTLPin5, lickmeterState5);
-  digitalWrite(lickTTLPin6, lickmeterState6);
-  digitalWrite(lickTTLPin7, lickmeterState7);
-
+    // read (and write into Intan) licking behaviour
+    lickmeterState1 = digitalRead(lickPin1);
+    lickmeterState2 = digitalRead(lickPin2);
+    lickmeterState3 = digitalRead(lickPin3);
+    lickmeterState4 = digitalRead(lickPin4);
+    lickmeterState5 = digitalRead(lickPin5);
+    lickmeterState6 = digitalRead(lickPin6);
+    lickmeterState7 = digitalRead(lickPin7);  
   
-  if (state == 0){ // first trial, mouse should lick in pos1 one to activate a FORWARD trial
-    if (lickmeterState1==aMouse){// Mouse licks in first port,
-      digitalWrite(solPin1, HIGH);    // ON
-      digitalWrite(solTTLPin1, HIGH); // ON  
-      delay(caudal1);
-      digitalWrite(solPin1, LOW);     // OFF
-      digitalWrite(solTTLPin1, LOW);  // OFF 
-      state = 1; // FORWARD trial
-    }
-   }
-
-  if (state == 1){ // if FORWARD trial
-    if (rewardsFound < rewardsToFind_FORWAD){
+    digitalWrite(lickTTLPin1, lickmeterState1);
+    digitalWrite(lickTTLPin2, lickmeterState2);
+    digitalWrite(lickTTLPin3, lickmeterState3);
+    digitalWrite(lickTTLPin4, lickmeterState4);
+    digitalWrite(lickTTLPin5, lickmeterState5);
+    digitalWrite(lickTTLPin6, lickmeterState6);
+    digitalWrite(lickTTLPin7, lickmeterState7);
+  
+  if (phase == 1){
+    if (state == 0){ // first trial, mouse should lick in pos1 one to activate a FORWARD trial
+      if (lickmeterState1==aMouse){// Mouse licks in first port,
+        digitalWrite(solPin1, HIGH);    // ON
+        digitalWrite(solTTLPin1, HIGH); // ON  
+        delay(caudal1);
+        digitalWrite(solPin1, LOW);     // OFF
+        digitalWrite(solTTLPin1, LOW);  // OFF 
+        state = 1; // FORWARD trial
+      }
+     }
+  
+    if (state == 1){ // if FORWARD trial
+      if (rewardsFound < rewardsToFind_FORWAD){
+        if        (lickmeterState2==aMouse && state_pos2_forward){
+            digitalWrite(solPin2, HIGH);    // ON
+            digitalWrite(solTTLPin2, HIGH); // ON  
+            delay(caudal2);
+            digitalWrite(solPin2, LOW);     // OFF
+            digitalWrite(solTTLPin2, LOW);  // OFF 
+            state_pos2_forward = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+            
+          } else if (lickmeterState3==aMouse && state_pos3_forward){
+            digitalWrite(solPin3, HIGH);    // ON
+            digitalWrite(solTTLPin3, HIGH); // ON  
+            delay(caudal3);
+            digitalWrite(solPin3, LOW);     // OFF
+            digitalWrite(solTTLPin3, LOW);  // OFF 
+            state_pos3_forward = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+            
+          } else if (lickmeterState4==aMouse && state_pos4_forward){
+            digitalWrite(solPin4, HIGH);    // ON
+            digitalWrite(solTTLPin4, HIGH); // ON  
+            delay(caudal4);
+            digitalWrite(solPin4, LOW);     // OFF
+            digitalWrite(solTTLPin4, LOW);  // OFF 
+            state_pos4_forward = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+            
+          } else if (lickmeterState5==aMouse && state_pos5_forward){
+            digitalWrite(solPin5, HIGH);    // ON
+            digitalWrite(solTTLPin5, HIGH); // ON  
+            delay(caudal5);
+            digitalWrite(solPin5, LOW);     // OFF
+            digitalWrite(solTTLPin5, LOW);  // OFF 
+            state_pos5_forward = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+            
+          } else if (lickmeterState6==aMouse && state_pos6_forward){
+            digitalWrite(solPin6, HIGH);    // ON
+            digitalWrite(solTTLPin6, HIGH); // ON  
+            delay(caudal6);
+            digitalWrite(solPin6, LOW);     // OFF
+            digitalWrite(solTTLPin6, LOW);  // OFF 
+            state_pos6_forward = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+          }
+        } else {
+          if (lickmeterState7==aMouse){
+            digitalWrite(solPin7, HIGH);    // ON
+            digitalWrite(solTTLPin7, HIGH); // ON  
+            delay(caudal7);
+            digitalWrite(solPin7, LOW);     // OFF
+            digitalWrite(solTTLPin7, LOW);  // OFF 
+            
+            state = 2; // activate REVERSE trial
+            state_pos2_forward = pos2_forward;
+            state_pos3_forward = pos3_forward;
+            state_pos4_forward = pos4_forward;
+            state_pos5_forward = pos5_forward;
+            state_pos6_forward = pos6_forward;
+            rewardsFound = 0;
+          }
+        }
+      }
+  
+     if (state == 2){ // if REVERSE trial
+       if (rewardsFound < rewardsToFind_REVERSE){
+        if        (lickmeterState2==aMouse && state_pos2_reverse){
+            digitalWrite(solPin2, HIGH);    // ON
+            digitalWrite(solTTLPin2, HIGH); // ON  
+            delay(caudal2);
+            digitalWrite(solPin2, LOW);     // OFF
+            digitalWrite(solTTLPin2, LOW);  // OFF 
+            state_pos2_reverse = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+            
+          } else if (lickmeterState3==aMouse && state_pos3_reverse){
+            digitalWrite(solPin3, HIGH);    // ON
+            digitalWrite(solTTLPin3, HIGH); // ON  
+            delay(caudal3);
+            digitalWrite(solPin3, LOW);     // OFF
+            digitalWrite(solTTLPin3, LOW);  // OFF 
+            state_pos3_reverse = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+            
+          } else if (lickmeterState4==aMouse && state_pos4_reverse){
+            digitalWrite(solPin4, HIGH);    // ON
+            digitalWrite(solTTLPin4, HIGH); // ON  
+            delay(caudal4);
+            digitalWrite(solPin4, LOW);     // OFF
+            digitalWrite(solTTLPin4, LOW);  // OFF 
+            state_pos4_reverse = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+            
+          } else if (lickmeterState5==aMouse && state_pos5_reverse){
+            digitalWrite(solPin5, HIGH);    // ON
+            digitalWrite(solTTLPin5, HIGH); // ON  
+            delay(caudal5);
+            digitalWrite(solPin5, LOW);     // OFF
+            digitalWrite(solTTLPin5, LOW);  // OFF 
+            state_pos5_reverse = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+            
+          } else if (lickmeterState6==aMouse && state_pos6_reverse){
+            digitalWrite(solPin6, HIGH);    // ON
+            digitalWrite(solTTLPin6, HIGH); // ON  
+            delay(caudal6);
+            digitalWrite(solPin6, LOW);     // OFF
+            digitalWrite(solTTLPin6, LOW);  // OFF 
+            state_pos6_reverse = 0; // deactivate port
+            rewardsFound = rewardsFound + 1;
+          }
+        } else {
+          if (lickmeterState1==aMouse){
+            digitalWrite(solPin7, HIGH);    // ON
+            digitalWrite(solTTLPin7, HIGH); // ON  
+            delay(caudal7);
+            digitalWrite(solPin7, LOW);     // OFF
+            digitalWrite(solTTLPin7, LOW);  // OFF 
+            
+            state = 1; // activate FORWARD trial
+            state_pos2_reverse = pos2_reverse;
+            state_pos3_reverse = pos3_reverse;
+            state_pos4_reverse = pos4_reverse;
+            state_pos5_reverse = pos5_reverse;
+            state_pos6_reverse = pos6_reverse;
+            rewardsFound = 0;
+            trialNumber = trialNumber + 1;
+          
+          }
+        }
+      }
+    } else if (phase == 0){
+    // release water for all designated ports
       if        (lickmeterState2==aMouse && state_pos2_forward){
-          digitalWrite(solPin2, HIGH);    // ON
-          digitalWrite(solTTLPin2, HIGH); // ON  
-          delay(caudal2);
-          digitalWrite(solPin2, LOW);     // OFF
-          digitalWrite(solTTLPin2, LOW);  // OFF 
-          state_pos2_forward = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-          
-        } else if (lickmeterState3==aMouse && state_pos3_forward){
-          digitalWrite(solPin3, HIGH);    // ON
-          digitalWrite(solTTLPin3, HIGH); // ON  
-          delay(caudal3);
-          digitalWrite(solPin3, LOW);     // OFF
-          digitalWrite(solTTLPin3, LOW);  // OFF 
-          state_pos3_forward = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-          
-        } else if (lickmeterState4==aMouse && state_pos4_forward){
-          digitalWrite(solPin4, HIGH);    // ON
-          digitalWrite(solTTLPin4, HIGH); // ON  
-          delay(caudal4);
-          digitalWrite(solPin4, LOW);     // OFF
-          digitalWrite(solTTLPin4, LOW);  // OFF 
-          state_pos4_forward = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-          
-        } else if (lickmeterState5==aMouse && state_pos5_forward){
-          digitalWrite(solPin5, HIGH);    // ON
-          digitalWrite(solTTLPin5, HIGH); // ON  
-          delay(caudal5);
-          digitalWrite(solPin5, LOW);     // OFF
-          digitalWrite(solTTLPin5, LOW);  // OFF 
-          state_pos5_forward = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-          
-        } else if (lickmeterState6==aMouse && state_pos6_forward){
-          digitalWrite(solPin6, HIGH);    // ON
-          digitalWrite(solTTLPin6, HIGH); // ON  
-          delay(caudal6);
-          digitalWrite(solPin6, LOW);     // OFF
-          digitalWrite(solTTLPin6, LOW);  // OFF 
-          state_pos6_forward = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-        }
-      } else {
-        if (lickmeterState7==aMouse){
-          digitalWrite(solPin7, HIGH);    // ON
-          digitalWrite(solTTLPin7, HIGH); // ON  
-          delay(caudal7);
-          digitalWrite(solPin7, LOW);     // OFF
-          digitalWrite(solTTLPin7, LOW);  // OFF 
-          
-          state = 2; // activate REVERSE trial
-          state_pos2_forward = pos2_forward;
-          state_pos3_forward = pos3_forward;
-          state_pos4_forward = pos4_forward;
-          state_pos5_forward = pos5_forward;
-          state_pos6_forward = pos6_forward;
-          rewardsFound = 0;
+        digitalWrite(solPin2, HIGH);    // ON
+        digitalWrite(solTTLPin2, HIGH); // ON  
+        delay(caudal2);
+        digitalWrite(solPin2, LOW);     // OFF
+        digitalWrite(solTTLPin2, LOW);  // OFF 
+        state_pos2_forward = 0; // deactivate port
+        // activate all other ports
+        state_pos1_forward = pos1_forward;
+        state_pos3_forward = pos3_forward;
+        state_pos4_forward = pos4_forward;
+        state_pos5_forward = pos5_forward;
+        state_pos6_forward = pos6_forward;
+        state_pos7_forward = pos7_forward;
+        trialNumber = trialNumber + 1;
         
-        }
-      }
-    }
-
-   if (state == 2){ // if REVERSE trial
-     if (rewardsFound < rewardsToFind_REVERSE){
-      if        (lickmeterState2==aMouse && state_pos2_reverse){
-          digitalWrite(solPin2, HIGH);    // ON
-          digitalWrite(solTTLPin2, HIGH); // ON  
-          delay(caudal2);
-          digitalWrite(solPin2, LOW);     // OFF
-          digitalWrite(solTTLPin2, LOW);  // OFF 
-          state_pos2_reverse = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-          
-        } else if (lickmeterState3==aMouse && state_pos3_reverse){
-          digitalWrite(solPin3, HIGH);    // ON
-          digitalWrite(solTTLPin3, HIGH); // ON  
-          delay(caudal3);
-          digitalWrite(solPin3, LOW);     // OFF
-          digitalWrite(solTTLPin3, LOW);  // OFF 
-          state_pos3_reverse = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-          
-        } else if (lickmeterState4==aMouse && state_pos4_reverse){
-          digitalWrite(solPin4, HIGH);    // ON
-          digitalWrite(solTTLPin4, HIGH); // ON  
-          delay(caudal4);
-          digitalWrite(solPin4, LOW);     // OFF
-          digitalWrite(solTTLPin4, LOW);  // OFF 
-          state_pos4_reverse = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-          
-        } else if (lickmeterState5==aMouse && state_pos5_reverse){
-          digitalWrite(solPin5, HIGH);    // ON
-          digitalWrite(solTTLPin5, HIGH); // ON  
-          delay(caudal5);
-          digitalWrite(solPin5, LOW);     // OFF
-          digitalWrite(solTTLPin5, LOW);  // OFF 
-          state_pos5_reverse = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-          
-        } else if (lickmeterState6==aMouse && state_pos6_reverse){
-          digitalWrite(solPin6, HIGH);    // ON
-          digitalWrite(solTTLPin6, HIGH); // ON  
-          delay(caudal6);
-          digitalWrite(solPin6, LOW);     // OFF
-          digitalWrite(solTTLPin6, LOW);  // OFF 
-          state_pos6_reverse = 0; // deactivate port
-          rewardsFound = rewardsFound + 1;
-        }
-      } else {
-        if (lickmeterState1==aMouse){
-          digitalWrite(solPin7, HIGH);    // ON
-          digitalWrite(solTTLPin7, HIGH); // ON  
-          delay(caudal7);
-          digitalWrite(solPin7, LOW);     // OFF
-          digitalWrite(solTTLPin7, LOW);  // OFF 
-          
-          state = 1; // activate FORWARD trial
-          state_pos2_reverse = pos2_reverse;
-          state_pos3_reverse = pos3_reverse;
-          state_pos4_reverse = pos4_reverse;
-          state_pos5_reverse = pos5_reverse;
-          state_pos6_reverse = pos6_reverse;
-          rewardsFound = 0;
-          trialNumber = trialNumber + 1;
+      } else if (lickmeterState1==aMouse && state_pos1_forward){
+        digitalWrite(solPin1, HIGH);    // ON
+        digitalWrite(solTTLPin1, HIGH); // ON  
+        delay(caudal1);
+        digitalWrite(solPin1, LOW);     // OFF
+        digitalWrite(solTTLPin1, LOW);  // OFF 
+        state_pos1_forward = 0; // deactivate port
+        // activate all other ports
+        state_pos2_forward = pos2_forward;
+        state_pos3_forward = pos3_forward;
+        state_pos4_forward = pos4_forward;
+        state_pos5_forward = pos5_forward;
+        state_pos6_forward = pos6_forward;
+        state_pos7_forward = pos7_forward;
+        trialNumber = trialNumber + 1;
         
-        }
+      } else if (lickmeterState3==aMouse && state_pos3_forward){
+        digitalWrite(solPin3, HIGH);    // ON
+        digitalWrite(solTTLPin3, HIGH); // ON  
+        delay(caudal3);
+        digitalWrite(solPin3, LOW);     // OFF
+        digitalWrite(solTTLPin3, LOW);  // OFF 
+        state_pos3_forward = 0; // deactivate port
+        // activate all other ports
+        state_pos2_forward = pos2_forward;
+        state_pos1_forward = pos1_forward;
+        state_pos4_forward = pos4_forward;
+        state_pos5_forward = pos5_forward;
+        state_pos6_forward = pos6_forward;
+        state_pos7_forward = pos7_forward;
+        trialNumber = trialNumber + 1;
+        
+      } else if (lickmeterState4==aMouse && state_pos4_forward){
+        digitalWrite(solPin4, HIGH);    // ON
+        digitalWrite(solTTLPin4, HIGH); // ON  
+        delay(caudal4);
+        digitalWrite(solPin4, LOW);     // OFF
+        digitalWrite(solTTLPin4, LOW);  // OFF 
+        state_pos4_forward = 0; // deactivate port
+        // activate all other ports
+        state_pos2_forward = pos2_forward;
+        state_pos1_forward = pos1_forward;
+        state_pos3_forward = pos3_forward;
+        state_pos5_forward = pos5_forward;
+        state_pos6_forward = pos6_forward;
+        state_pos7_forward = pos7_forward;
+        trialNumber = trialNumber + 1;
+        
+      } else if (lickmeterState5==aMouse && state_pos5_forward){
+        digitalWrite(solPin5, HIGH);    // ON
+        digitalWrite(solTTLPin5, HIGH); // ON  
+        delay(caudal5);
+        digitalWrite(solPin5, LOW);     // OFF
+        digitalWrite(solTTLPin5, LOW);  // OFF 
+        state_pos5_forward = 0; // deactivate port
+        // activate all other ports
+        state_pos2_forward = pos2_forward;
+        state_pos1_forward = pos1_forward;
+        state_pos3_forward = pos3_forward;
+        state_pos4_forward = pos4_forward;
+        state_pos6_forward = pos6_forward;
+        state_pos7_forward = pos7_forward;
+        trialNumber = trialNumber + 1;
+        
+      } else if (lickmeterState6==aMouse && state_pos6_forward){
+        digitalWrite(solPin6, HIGH);    // ON
+        digitalWrite(solTTLPin6, HIGH); // ON  
+        delay(caudal6);
+        digitalWrite(solPin6, LOW);     // OFF
+        digitalWrite(solTTLPin6, LOW);  // OFF 
+        state_pos6_forward = 0; // deactivate port
+        // activate all other ports
+        state_pos2_forward = pos2_forward;
+        state_pos1_forward = pos1_forward;
+        state_pos3_forward = pos3_forward;
+        state_pos4_forward = pos4_forward;
+        state_pos5_forward = pos5_forward;
+        state_pos7_forward = pos7_forward;
+        trialNumber = trialNumber + 1;
+        
+      } else if (lickmeterState6==aMouse && state_pos7_forward){
+        digitalWrite(solPin7, HIGH);    // ON
+        digitalWrite(solTTLPin7, HIGH); // ON  
+        delay(caudal7);
+        digitalWrite(solPin7, LOW);     // OFF
+        digitalWrite(solTTLPin7, LOW);  // OFF 
+        state_pos7_forward = 0; // deactivate port
+        // activate all other ports
+        state_pos2_forward = pos2_forward;
+        state_pos1_forward = pos1_forward;
+        state_pos3_forward = pos3_forward;
+        state_pos4_forward = pos4_forward;
+        state_pos5_forward = pos5_forward;
+        state_pos6_forward = pos6_forward;
+        trialNumber = trialNumber + 1;
       }
+      
+    } else if (phase == 2){
+    // do nothing, just tell intan about licking behaviour  
+      
     }
 }
 
