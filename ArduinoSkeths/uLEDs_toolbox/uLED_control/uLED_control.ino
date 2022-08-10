@@ -1,5 +1,27 @@
-/* Send a TTL pulse on any of the 1-12 trigger-in channel of the OSCLite 1 for 
-/ controlling the uLED, according to some specification */
+/* Send a TTL pulse on any of the 1-12 trigger-in channel of the OSCLite 1/ NeuroLight Stimulator System (Plexon)  for 
+/ controlling the uLED, according to some specification
+
+HARDWARE: Arduino (DUE, but any would work) DIGITAL OUT connected to DIGITAL IN of the Stimulator, according to 
+the following mapping:
+ ARDUINO  |  SIMULATOR
+ ---------------------
+    34          1
+    32          2
+    36          3
+    30          4
+    38          5
+    28          6
+    40          7
+    26          8
+    42          9
+    24         10
+    44         11
+    22         12
+----------------------
+
+Manuel Valero 20212
+*/
+
 // settings
 int delayBetweenPulsesFrom = 20; // in ms, first value on range of for random pulses delay, for example 20
 int delayBetweenPulsesTo = 40; // in ms, last value on range of for random pulses delay, for example 40
@@ -86,6 +108,7 @@ void loop() {
       digitalWrite(s4l3Pin, HIGH); delay(pulseDuration); digitalWrite(s4l3Pin, LOW);
       }
     delayBetweenPulses = random(delayBetweenPulsesFrom,delayBetweenPulsesTo); // random number from 1 to 12
+    digitalWrite(LED_BUILTIN, LOW);   // turn the LED on   
     delay(delayBetweenPulses);
       
     } else {
