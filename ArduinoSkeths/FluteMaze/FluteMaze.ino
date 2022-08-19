@@ -3,11 +3,15 @@
 /* 
  *  Arduino code for flute maze
  *  
- *  Ver 1.0, 8/2022
+ *  Ver 1.1, 8/2022
+ *  08/19/22 Now includes LED to signal new trial
+ *  08/19/22 Includes sound when error
+ *  08/19/22 Now it is possible to specify number of rewards position to find
  *  Manuel Valero
  */
 
  #include <MsTimer2.h> // // Extrict control time library
+ #include <toneAC.h>
 
 // USER VARIABLES
 int caudal1 = 80; // time solenoid is open, in ms
@@ -19,6 +23,9 @@ int caudal6 = 80; // time solenoid is open, in ms
 int caudal7 = 80; // time solenoid is open, in ms
 
 int phase = 0; // trainning is 0, test is 1, probe is 2;
+bool soundErrors = true;
+int soundErrorFreq = 15000; // in HZ
+int soundErrorDuration = 100; // in ms
 
 /* ==================== SELECT REWARDED POSITIONS =======================*/
 // pos1 and pos7 are at both extremes of the maze. They are always rewarded
@@ -38,6 +45,9 @@ int pos6_reverse = 0;
 int pos1_forward = 0;
 int pos7_forward = 0;
 
+int rewardsToFind_FORWAD = 1;;
+int rewardsToFind_REVERSE = 0;
+
 /* ==================== PINS ============================================*/
 // Solenoid Pins
 const int solPin1 = 40; // Ouputpin for close circuit on transistor - #1
@@ -56,6 +66,9 @@ const int lickPin4 = 47;  // Input pin for IR #4
 const int lickPin5 = 49;  // Input pin for IR #5
 const int lickPin6 = 51;  // Input pin for IR #6
 const int lickPin7 = 53;  // Input pin for IR #7
+
+// LED
+const int ledPin1 = 10; // Output pin to power an LED to start trial
 
 /* ==============INTAN PINS ============================================*/
 
@@ -108,8 +121,8 @@ int state_pos4_reverse = pos4_reverse;
 int state_pos5_reverse = pos5_reverse;
 int state_pos6_reverse = pos6_reverse;
 
-int rewardsToFind_FORWAD = pos2_forward + pos3_forward + pos4_forward + pos5_forward + pos6_forward;;
-int rewardsToFind_REVERSE = pos2_reverse + pos3_reverse + pos4_reverse + pos5_reverse + pos6_reverse;
+// int rewardsToFind_FORWAD = pos2_forward + pos3_forward + pos4_forward + pos5_forward + pos6_forward;;
+// int rewardsToFind_REVERSE = pos2_reverse + pos3_reverse + pos4_reverse + pos5_reverse + pos6_reverse;
 
 void setup() {
 
@@ -147,6 +160,8 @@ void setup() {
   pinMode(lickTTLPin5, OUTPUT); // set pin as OUTPUT
   pinMode(lickTTLPin6, OUTPUT); // set pin as OUTPUT
   pinMode(lickTTLPin7, OUTPUT); // set pin as OUTPUT
+
+  pinMode(ledPin1, OUTPUT); // set pin as OUTPUT
 
   digitalWrite(solPin1, LOW); // OFF
   digitalWrite(solTTLPin1, LOW); // OFF  
@@ -188,6 +203,7 @@ void loop() {
   
   if (phase == 1){
     if (state == 0){ // first trial, mouse should lick in pos1 one to activate a FORWARD trial
+      digitalWrite(ledPin1, HIGH);    // ON
       if (lickmeterState1==aMouse){// Mouse licks in first port,
         digitalWrite(solPin1, HIGH);    // ON
         digitalWrite(solTTLPin1, HIGH); // ON  
@@ -195,6 +211,7 @@ void loop() {
         digitalWrite(solPin1, LOW);     // OFF
         digitalWrite(solTTLPin1, LOW);  // OFF 
         state = 1; // FORWARD trial
+        digitalWrite(ledPin1, LOW);    // OFF
       }
      }
   
@@ -245,6 +262,21 @@ void loop() {
             state_pos6_forward = 0; // deactivate port
             rewardsFound = rewardsFound + 1;
           }
+        } else if (lickmeterState2==aMouse && soundErrors){
+          toneAC(soundErrorFreq);
+          delay(soundErrorDuration);
+        } else if (lickmeterState3==aMouse && soundErrors){
+          toneAC(soundErrorFreq);
+          delay(soundErrorDuration);
+        } else if (lickmeterState4==aMouse && soundErrors){
+          toneAC(soundErrorFreq);
+          delay(soundErrorDuration);
+        } else if (lickmeterState5==aMouse && soundErrors){
+          toneAC(soundErrorFreq);
+          delay(soundErrorDuration);
+        } else if (lickmeterState5==aMouse && soundErrors){
+          toneAC(soundErrorFreq);
+          delay(soundErrorDuration);
         } else {
           if (lickmeterState7==aMouse){
             digitalWrite(solPin7, HIGH);    // ON
