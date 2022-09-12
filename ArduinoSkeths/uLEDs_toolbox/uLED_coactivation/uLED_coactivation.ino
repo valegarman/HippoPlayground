@@ -11,7 +11,7 @@
 
  Then define the co-activation epochs (number of pulses and inter pulse interval), for example 6 pulses, 8.3 ms appart,
  for a ripple like co-activation).
-        Epoch of N pulses (for example, 6)
+        Epoch of 6 pulses
   _________|_|_|_|_|_|_____________
 
 
@@ -51,15 +51,15 @@ Manuel Valero 2022
 // settings
 int numberOfGroups = 2; // declare number of groups that will be use
 
-int group1_lights[] = {1, 0, 0,   0, 0, 0,   1, 0, 0,   0, 0, 0}; // 3 and 9
+int group1_lights[] = {1, 0, 0,   0, 0, 0,   0, 1, 0,   0, 0, 0}; // 1 and 8
 
 int group2_lights[] = {0, 0, 0,   1, 1, 1,   0, 0, 0,   1, 1, 1}; // 4, 5, 6, 10, 11, 12
 
-int group3_lights[] = {0, 0, 0,   0, 0, 0,   0, 0, 0,   0, 0, 0}; // 1 and 8
+int group3_lights[] = {0, 0, 0,   1, 1, 1,   0, 0, 0,   1, 1, 1}; // 1 and 8
 
 int group4_lights[] = {0, 0, 0,   0, 0, 0,   0, 0, 0,   0, 0, 0}; // 1 and 8
 
-int pulses_per_epoch = 1;
+int pulses_per_epoch = 6;
 
 int epoch_inter_event_interval = 4150; // in microseconds, half of a ripple cycle, 8.300 ms/1000/2 = 4150
 
