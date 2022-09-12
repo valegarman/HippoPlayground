@@ -93,10 +93,6 @@ int delayTriggerGroup4_max = 100;        // in ms, last value on range for trigg
 
 boolean continousStimulation = true;// stimulation no dependent of the behavoiur arduino
 
-// ASCII code:
-int stimOn_ascii = 105;
-int stimOff_ascii  = 115;
-
 // Pins
 const int s1l1Pin = 34; // #1 txt
 const int s1l2Pin = 32; // #2 txt
@@ -158,37 +154,31 @@ void setup() {
   pinMode(ttlPin,OUTPUT);
 
   pinMode(BlockPin, INPUT);
+  pinMode(SpikeTriggerIn, INPUT);
+  pinMode(noiseIn, INPUT);
 
   delayTriggerGroup1 = random(delayTriggerGroup1_min,delayTriggerGroup1_max); // 
   delayTriggerGroup2 = random(delayTriggerGroup2_min,delayTriggerGroup2_max); // 
   delayTriggerGroup3 = random(delayTriggerGroup3_min,delayTriggerGroup3_max); // 
   delayTriggerGroup4 = random(delayTriggerGroup4_min,delayTriggerGroup4_max); // 
-
   
   randomSeed(analogRead(A0));   
 }
 
 void loop() {
-  if (Serial.available() > 0){
-    value = Serial.read();
-  if (value == stimOn_ascii){
-    state = 1;
-    }else if (value == stimOff_ascii){
-      state = 0;
-    }
-  }
-  if (state == 1){
-      digitalWrite(LED_BUILTIN,HIGH);
-  if (digitalRead(BlockPin) == HIGH | continousStimulation){
 
+  if (digitalRead(BlockPin) == HIGH | continousStimulation){
       now = millis();                                                           // save time
-      if  (digitalRead(SpikeTriggerIn) == HIGH && digitalRead(noiseIn) == LOW){ // if spike and not noise
-        digitalWrite(LED_BUILTIN,HIGH);
-        spikeTime = now;
-        activeGroup1 = true;
-        activeGroup2 = true;
-        activeGroup3 = true;
-        activeGroup4 = true;
+      if  (digitalRead(SpikeTriggerIn) == HIGH){ // if spike and not noise
+        // runEpochs(group1_lights[0],group1_lights[1],group1_lights[2],group1_lights[3],group1_lights[4],group1_lights[5],group1_lights[6],group1_lights[7],group1_lights[8],group1_lights[9],group1_lights[10],group1_lights[11],epoch_inter_event_interval,pulseDuration,pulses_per_epoch);
+        digitalWrite(ttlPin,HIGH);
+        delay(10);
+        digitalWrite(LED_BUILTIN,LOW);
+        //spikeTime = now;
+        //activeGroup1 = true;
+        //activeGroup2 = true;
+        //activeGroup3 = true;
+        //activeGroup4 = true;
       }
   
       if (activeGroup1 == true && now >=  spikeTime + delayTriggerGroup1){
@@ -221,9 +211,6 @@ void loop() {
       
     } else {
       digitalWrite(LED_BUILTIN, LOW);   // turn the LED off   
-    }
-  }else if (state == 0){
-    digitalWrite(LED_BUILTIN,LOW);
     }
 }
 
