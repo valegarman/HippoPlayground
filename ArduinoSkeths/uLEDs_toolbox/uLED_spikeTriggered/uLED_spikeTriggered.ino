@@ -9,6 +9,7 @@
  *   \  /  \  /  \  /  \  /
  *   
 
+<<<<<<< HEAD
  Then define the stimlulus epochs (number of pulses and inter pulse interval), for example 1 pulse, for all groups.
  Epoch of 1 pulse
   _____________|___________________
@@ -19,6 +20,9 @@
 
 
 And then, define the temporal window (min-max) for the spike triggered stimulus (input in spikeTriggerIn, pin 12).
+=======
+Define the temporal window (min-max) for the spike triggered stimulus (input in spikeTriggerIn, pin 12).
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 If an spike is also detetected in noiseIn, skip.
 
                   Spike!                          Noise!
@@ -30,8 +34,13 @@ LED A2         ______|____________________________________________________
                                    Epoch of one pulse at  50ms in group 2 (which includes LED B1 and B2)     
 LED B1 ______________________________|____________________________________
 LED B2 ______________________________|____________________________________
+<<<<<<< HEAD
 GROUP 1 always runs with NO DELAY.
 
+=======
+
+Notes: group1 is always activated when spike is detected (it is not possible to define min-max window for the stimulus delivery for that group)
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 
 HARDWARE: 
 1) Arduino (DUE, but any would work) DIGITAL OUT connected to DIGITAL IN of the Stimulator, according to 
@@ -56,14 +65,22 @@ the following mapping:
 
 3) Digital out from Intan connected to noiseIn Pin of Arduino.  Folow same spteps for spikes detection but in a channel with no spikes.
 
+<<<<<<< HEAD
 NOTE: To increase speed, it is recomended to prevent the activation of those LED groups that are not in use (line 188 to 191)
+=======
+NOTE: To increase speed, it is recomended to prevent the activation of those LED groups that are not in use (line 177 to 179)
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 Manuel Valero 2022
 */
 
 // settings
 int numberOfGroups = 3; // declare number of groups that will be use
 
+<<<<<<< HEAD
 int group1_lights[] = {1, 1, 1,   0, 0, 0,   0, 1, 0,   0, 0, 0}; // 1 and 8
+=======
+int group1_lights[] = {1, 1, 1,   0, 0, 0,   0, 0, 0,   0, 0, 0}; // 1 and 8
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 
 int group2_lights[] = {0, 0, 0,   1, 1, 1,   0, 0, 0,   1, 1, 1}; // 4, 5, 6, 10, 11, 12
 
@@ -71,6 +88,7 @@ int group3_lights[] = {0, 0, 0,   0, 0, 0,   1, 1, 1,   0, 0, 0}; // 1 and 8
 
 int group4_lights[] = {0, 0, 0,   0, 0, 0,   0, 0, 0,   0, 0, 0}; // 1 and 8
 
+<<<<<<< HEAD
 
 int pulses_per_epoch = 1;
 
@@ -83,16 +101,32 @@ int delayTriggerGroup2_max = 40;        // in ms, last value on range for trigge
 
 int delayTriggerGroup3_min = 0;        // in ms, first value on range for triggered stimulation in group1, for example 0
 int delayTriggerGroup3_max = 0;        // in ms, last value on range for triggered stimulation in group1 for example 10
+=======
+int pulseDuration = 5;               // in miliseconds 1 ms
+
+
+int delayTriggerGroup1_min = 0;        // in ms, first value on range for triggered stimulation in group1, for example 0
+int delayTriggerGroup1_max = 0;        // in ms, last value on range for triggered stimulation in group1 for example 10
+
+int delayTriggerGroup2_min = 10;        // in ms, first value on range for triggered stimulation in group1, for example 0
+int delayTriggerGroup2_max = 20;        // in ms, last value on range for triggered stimulation in group1 for example 10
+
+int delayTriggerGroup3_min = 30;        // in ms, first value on range for triggered stimulation in group1, for example 0
+int delayTriggerGroup3_max = 40;        // in ms, last value on range for triggered stimulation in group1 for example 10
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 
 int delayTriggerGroup4_min = 40;        // in ms, first value on range for triggered stimulation in group1, for example 0
 int delayTriggerGroup4_max = 100;        // in ms, last value on range for triggered stimulation in group1 for example 10
 
 boolean continousStimulation = true;// stimulation no dependent of the behavoiur arduino
 
+<<<<<<< HEAD
 // ASCII code:
 int stimOn_ascii = 105;
 int stimOff_ascii  = 115;
 
+=======
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 // Pins
 const int s1l1Pin = 34; // #1 txt
 const int s1l2Pin = 32; // #2 txt
@@ -114,8 +148,13 @@ const int ttlPin = 10;
 
 const int BlockPin = 53;       // From the control behaviour arduino
 
+<<<<<<< HEAD
 const int SpikeTriggerIn = 12; // From intan
 const int noiseIn = 13;        // From intan
+=======
+const int SpikeTriggerIn = 11; // From intan
+const int noiseIn = 12;        // From intan
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 
 // state variables
 int stimBlock = 0;      // 0 is no stimulating
@@ -123,13 +162,19 @@ int ledGroup = 0;
 int delayTriggerGroup2;
 int delayTriggerGroup3;
 int delayTriggerGroup4;
+<<<<<<< HEAD
 bool activeGroup1 = false;
+=======
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 bool activeGroup2 = false;
 bool activeGroup3 = false;
 bool activeGroup4 = false;
 int state = 0;
 int value = 0;
+<<<<<<< HEAD
 int spikeTime = 0;
+=======
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 int now = 0;
 
 void setup() {
@@ -153,17 +198,26 @@ void setup() {
   pinMode(ttlPin,OUTPUT);
 
   pinMode(BlockPin, INPUT);
+<<<<<<< HEAD
+=======
+  pinMode(SpikeTriggerIn, INPUT);
+  pinMode(noiseIn, INPUT);
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
 
   delayTriggerGroup2 = random(delayTriggerGroup2_min,delayTriggerGroup2_max); // 
   delayTriggerGroup3 = random(delayTriggerGroup3_min,delayTriggerGroup3_max); // 
   delayTriggerGroup4 = random(delayTriggerGroup4_min,delayTriggerGroup4_max); // 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
   
   randomSeed(analogRead(A0));   
 }
 
 void loop() {
 
+<<<<<<< HEAD
   
   if (digitalRead(BlockPin) == HIGH | continousStimulation){
 
@@ -195,10 +249,44 @@ void loop() {
         delayTriggerGroup3 = random(delayTriggerGroup3_min,delayTriggerGroup3_max); // 
         activeGroup3 = false;
       }
+=======
+  if (digitalRead(BlockPin) == HIGH | continousStimulation){
+      now = millis();                                                           // save time
+      if  (digitalRead(SpikeTriggerIn) == HIGH && digitalRead(noiseIn)==LOW){  // if spike and not noise
+                                                                                // run group1, which is always activated after spike detection 0                                                                    
+        runEpochs(group1_lights[0],group1_lights[1],group1_lights[2],group1_lights[3],group1_lights[4],group1_lights[5],group1_lights[6],group1_lights[7],group1_lights[8],group1_lights[9],group1_lights[10],group1_lights[11],pulseDuration);
+        delayTriggerGroup2 = random(delayTriggerGroup2_min,delayTriggerGroup2_max) + now; // 
+        delayTriggerGroup3 = random(delayTriggerGroup3_min,delayTriggerGroup3_max) + now; // 
+        //delayTriggerGroup4 = random(delayTriggerGroup4_min,delayTriggerGroup4_max) + now; // 
+        
+        activeGroup2 = true;
+        activeGroup3 = true;
+        //activeGroup4 = true;
+      }
+  
+      if ((activeGroup2 == true) && (now >= delayTriggerGroup2)){
+        // delay(5);
+        runEpochs(group2_lights[0],group2_lights[1],group2_lights[2],group2_lights[3],group2_lights[4],group2_lights[5],group2_lights[6],group2_lights[7],group2_lights[8],group2_lights[9],group2_lights[10],group2_lights[11],pulseDuration);
+        activeGroup2 = false;
+      }
+  
+      if ((activeGroup2 == true) && (now >= delayTriggerGroup3)){
+        // delay(5);
+        runEpochs(group3_lights[0],group3_lights[1],group3_lights[2],group3_lights[3],group3_lights[4],group3_lights[5],group3_lights[6],group3_lights[7],group3_lights[8],group3_lights[9],group3_lights[10],group3_lights[11],pulseDuration);
+        activeGroup2 = false;
+      }
+  
+      //if (activeGroup4 == true && now >= delayTriggerGroup4){
+      //  runEpochs(group4_lights[0],group4_lights[1],group4_lights[2],group4_lights[3],group4_lights[4],group4_lights[5],group4_lights[6],group4_lights[7],group4_lights[8],group4_lights[9],group4_lights[10],group4_lights[11],epoch_inter_event_interval,pulseDuration,pulses_per_epoch);
+      //  delayTriggerGroup3 = random(delayTriggerGroup3_min,delayTriggerGroup3_max); // 
+      //  activeGroup3 = false;
+      //}
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
       
     } else {
       digitalWrite(LED_BUILTIN, LOW);   // turn the LED off   
     }
+<<<<<<< HEAD
  }
 
 void runEpochs(int light1, int light2, int light3, int light4, int light5, int light6, int light7, int light8, int light9, int light10, int light11, int light12, int epoch_inter_event_interval, int pulseDuration, int pulses_per_epoch){
@@ -257,4 +345,60 @@ void runEpochs(int light1, int light2, int light3, int light4, int light5, int l
       
       delayMicroseconds(epoch_inter_event_interval);
     }
+=======
+}
+
+void runEpochs(int light1, int light2, int light3, int light4, int light5, int light6, int light7, int light8, int light9, int light10, int light11, int light12, int pulseDuration){
+   if (light1 == 1){
+      digitalWrite(s1l1Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(1);} 
+      if (light2 == 1){
+      digitalWrite(s1l2Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(2);} 
+      if (light3 == 1){
+      digitalWrite(s1l3Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(3);} 
+      if (light4 == 1){
+      digitalWrite(s2l1Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(4);} 
+      if (light5 == 1){
+      digitalWrite(s2l2Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(5);} 
+      if (light6 == 1){ 
+      digitalWrite(s2l3Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(6);} 
+      if (light7 == 1){
+      digitalWrite(s3l1Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(7);} 
+      if (light8 == 1){
+      digitalWrite(s3l2Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(8);} 
+      if (light9 == 1){
+      digitalWrite(s3l3Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(9);} 
+      if (light10 ==1){
+      digitalWrite(s4l1Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(10);} 
+      if (light11 ==1){
+      digitalWrite(s4l2Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(11);} 
+      if (light12 ==1){
+      digitalWrite(s4l3Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(12);}
+
+      delay(pulseDuration);
+
+      if (light1 == 1){
+      digitalWrite(s1l1Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      if (light2 == 1){
+      digitalWrite(s1l2Pin, LOW); digitalWrite(ttlPin,LOW);}
+      if (light3 == 1){
+      digitalWrite(s1l3Pin, LOW); digitalWrite(ttlPin,LOW);}
+      if (light4 == 1){
+      digitalWrite(s2l1Pin, LOW); digitalWrite(ttlPin,LOW);}
+      if (light5 == 1){
+      digitalWrite(s2l2Pin, LOW); digitalWrite(ttlPin,LOW);}
+      if (light6 == 1){ 
+      digitalWrite(s2l3Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      if (light7 == 1){
+      digitalWrite(s3l1Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      if (light8 == 1){
+      digitalWrite(s3l2Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      if (light9 == 1){
+      digitalWrite(s3l3Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      if (light10 ==1){
+      digitalWrite(s4l1Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      if (light11 ==1){
+      digitalWrite(s4l2Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      if (light12 ==1){
+      digitalWrite(s4l3Pin, LOW); digitalWrite(ttlPin,LOW);} 
+>>>>>>> e3f589736c0c8dfb59f583c1b64530df4d5c94ca
   }
