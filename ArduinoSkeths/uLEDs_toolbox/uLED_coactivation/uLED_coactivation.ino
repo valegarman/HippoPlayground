@@ -152,56 +152,56 @@ void loop() {
 void runEpochs(int light1, int light2, int light3, int light4, int light5, int light6, int light7, int light8, int light9, int light10, int light11, int light12, int epoch_inter_event_interval, int pulseDuration, int pulses_per_epoch){
     for (int j = 0; j < pulses_per_epoch; j++){
       if (light1 == 1){
-      digitalWrite(s1l1Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(1);} 
+      digitalWrite(s1l1Pin, HIGH);}
       if (light2 == 1){
-      digitalWrite(s1l2Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(2);} 
+      digitalWrite(s1l2Pin, HIGH);}
       if (light3 == 1){
-      digitalWrite(s1l3Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(3);} 
+      digitalWrite(s1l3Pin, HIGH);}
       if (light4 == 1){
-      digitalWrite(s2l1Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(4);} 
+      digitalWrite(s2l1Pin, HIGH);}
       if (light5 == 1){
-      digitalWrite(s2l2Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(5);} 
+      digitalWrite(s2l2Pin, HIGH);}
       if (light6 == 1){ 
-      digitalWrite(s2l3Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(6);} 
+      digitalWrite(s2l3Pin, HIGH);}
       if (light7 == 1){
-      digitalWrite(s3l1Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(7);} 
+      digitalWrite(s3l1Pin, HIGH);}
       if (light8 == 1){
-      digitalWrite(s3l2Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(8);} 
+      digitalWrite(s3l2Pin, HIGH);}
       if (light9 == 1){
-      digitalWrite(s3l3Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(9);} 
+      digitalWrite(s3l3Pin, HIGH);}
       if (light10 ==1){
-      digitalWrite(s4l1Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(10);} 
+      digitalWrite(s4l1Pin, HIGH);}
       if (light11 ==1){
-      digitalWrite(s4l2Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(11);} 
+      digitalWrite(s4l2Pin, HIGH);}
       if (light12 ==1){
-      digitalWrite(s4l3Pin, HIGH); digitalWrite(ttlPin,HIGH); Serial.println(12);}
+      digitalWrite(s4l3Pin, HIGH);}
 
       delayMicroseconds(pulseDuration);
 
       if (light1 == 1){
-      digitalWrite(s1l1Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      digitalWrite(s1l1Pin, LOW);}
       if (light2 == 1){
-      digitalWrite(s1l2Pin, LOW); digitalWrite(ttlPin,LOW);}
+      digitalWrite(s1l2Pin, LOW);}
       if (light3 == 1){
-      digitalWrite(s1l3Pin, LOW); digitalWrite(ttlPin,LOW);}
+      digitalWrite(s1l3Pin, LOW);}
       if (light4 == 1){
-      digitalWrite(s2l1Pin, LOW); digitalWrite(ttlPin,LOW);}
+      digitalWrite(s2l1Pin, LOW);}
       if (light5 == 1){
-      digitalWrite(s2l2Pin, LOW); digitalWrite(ttlPin,LOW);}
+      digitalWrite(s2l2Pin, LOW);}
       if (light6 == 1){ 
-      digitalWrite(s2l3Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      digitalWrite(s2l3Pin, LOW);}
       if (light7 == 1){
-      digitalWrite(s3l1Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      digitalWrite(s3l1Pin, LOW);}
       if (light8 == 1){
-      digitalWrite(s3l2Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      digitalWrite(s3l2Pin, LOW);}
       if (light9 == 1){
-      digitalWrite(s3l3Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      digitalWrite(s3l3Pin, LOW);}
       if (light10 ==1){
-      digitalWrite(s4l1Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      digitalWrite(s4l1Pin, LOW);}
       if (light11 ==1){
-      digitalWrite(s4l2Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      digitalWrite(s4l2Pin, LOW);}
       if (light12 ==1){
-      digitalWrite(s4l3Pin, LOW); digitalWrite(ttlPin,LOW);} 
+      digitalWrite(s4l3Pin, LOW);}
       
       delayMicroseconds(epoch_inter_event_interval);
     }
