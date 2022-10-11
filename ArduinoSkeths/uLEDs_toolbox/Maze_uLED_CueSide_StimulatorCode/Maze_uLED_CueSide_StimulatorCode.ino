@@ -47,9 +47,9 @@ int group1_lights[] = {1, 1, 1,   0, 0, 0,   0, 0, 0,   0, 0, 0}; //
 
 int group2_lights[] = {0, 0, 0,   0, 0, 0,   0, 0, 0,   1, 1, 1}; // 
 
-int epoch_inter_event_interval = 18800; // in microseconds, 18.8ms (53.19Hz, gamma) x1000 = 18800
+int epoch_inter_event_interval = 9400; // in microseconds, 18.8ms (53.19Hz, gamma) x1000 = 18800
 
-int pulseDuration = 18800; //
+int pulseDuration = 9400; //
 
 int maxStimEpoch = 5000; //           // in milliseconds
 
@@ -72,7 +72,7 @@ const int s4l1Pin = 24; //
 const int s4l2Pin = 44; // 
 const int s4l3Pin = 22; // 
 
-const int stimPin = 53;// From the control behaviour arduino
+const int stimPin = 50;// From the control behaviour arduino
 const int sidePin = 51;// From the control behaviour arduino
 
 // state variables
@@ -107,20 +107,26 @@ void setup() {
   pinMode(sidePin, INPUT);
 
   randomSeed(analogRead(A0));   
+
+  Serial.begin(9600); //Start serial communication boud rate at 9600
+  Serial.flush();
 }
 
 void loop() {
+  
   now = millis(); 
-  if (waitingForStim == true && digitalRead(stimPin) == HIGH){ // time when mouse goes to stim area
+  if (waitingForStim == true && digitalRead(stimPin) == HIGH){
     startStim = now;
     waitingForStim = false;
+  } else if (digitalRead(stimPin) == LOW){
+    waitingForStim = true;
   }
+  
   if (now <= startStim + maxStimEpoch){
     doStimulate = true;
   } else {
     doStimulate = false;
   }
-  
   
   if        (doStimulate && digitalRead(sidePin) == LOW){
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on   
