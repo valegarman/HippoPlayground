@@ -2,7 +2,7 @@
  *  Sofware for 8 maze ...
  *  
  *  Ver 1.0, 04/2019   
- *  BuzsakiLab-MVyes
+ *  BuzsakiLab-MV
  */
 
 #include <MsTimer2.h> // // Extrict control time library
@@ -16,10 +16,10 @@ boolean randDelay = false;
 int homeDelayVec[] = {100,1000*10};
 int homeDelayRand; 
 
-int caudalR = 55; // time solenoid is open, in ms
-int caudalL = 60; // time solenoid is open, in ms
+int caudalR = 40; // time solenoid is open, in ms
+int caudalL = 75; // time solenoid is open, in ms
 boolean forceAlternation = false; // for training or single track, true
-int homeDelay = 0; // minium 100ms, to be sure that is recorded!!!! 
+int homeDelay = 100*1;//0; // minium 100ms, to be sure that is recorded!!!! 
 int optArm = 7; // 1 - optogenetics on right arm, 
                 // 2 - on left arm, 
                 // 3 - side arms
@@ -73,7 +73,7 @@ const int closeDoor3 = 179;
 const int openDoor4 = 179;
 const int closeDoor4 = 50;
 
-const int openDoor5 = 173;
+const int openDoor5 = 169;
 const int closeDoor5 = 30;
 
 boolean firstTrial = true;
@@ -133,7 +133,7 @@ void setup() {
   Serial.flush();
 
   // MsTimer setup, running every 1000 ms
-  MsTimer2::set(5000,flash); // run flash every 1000 ms
+  MsTimer2::set(2000,flash); // run flash every 1000 ms
   MsTimer2::start(); //enable the interrupt
 
   timingLastPulse = millis();
@@ -213,7 +213,6 @@ void loop() {
   else if (state == 1) { // if animal comes from right
     if (digitalRead(IRsensor5) == aMouse){ // when detected
        servo5.write(closeDoor5);
-       servo5.write(closeDoor4);
        servo1.write(openDoor1);
        servo2.write(openDoor2);
        //
@@ -233,7 +232,6 @@ void loop() {
   else if (state == 2) {  // if animal comes from left
     if (digitalRead(IRsensor4) == aMouse){ // when detected
        servo4.write(closeDoor4);
-       servo4.write(closeDoor5);
        servo1.write(openDoor1);
        servo2.write(openDoor2);
        //
@@ -284,7 +282,7 @@ void flash(){
   syncState = !syncState;
   digitalWrite(syncPin, syncState);
   Serial.print(timeCounter);
-  timeCounter = timeCounter + 5;
+  timeCounter = timeCounter + 2;
   Serial.print("s, right trials: ");
   Serial.print(rTrial);
   Serial.print(", left trials: ");
