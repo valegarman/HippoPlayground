@@ -66,11 +66,12 @@ Manuel Valero 2022
 */
 
 // settings
-int group1_lights[] = {1, 1, 1,   0, 0, 0,   0, 1, 0,   0, 0, 0}; // 1 and 8
+//                     1  2  3    4  5  6    7  8  9   10 11 12
+int group1_lights[] = {0, 0, 0,   0, 0, 0,   0, 0, 0,   1, 1, 1}; // 1 and 8
 
-int group2_lights[] = {0, 0, 0,   1, 1, 1,   0, 0, 0,   1, 1, 1}; // 4, 5, 6, 10, 11, 12
+int group2_lights[] = {0, 0, 0,   1, 1, 1,   0, 0, 0,   0, 0, 0}; // 4, 5, 6, 10, 11, 12
 
-int group3_lights[] = {0, 0, 0,   0, 0, 0,   1, 1, 1,   0, 0, 0}; // 1 and 8
+int group3_lights[] = {1, 1, 1,   0, 0, 0,   0, 0, 0,   0, 0, 0}; // 1 and 8
 
 int group4_lights[] = {0, 0, 0,   0, 0, 0,   0, 0, 0,   0, 0, 0}; // 1 and 8
 
@@ -83,11 +84,11 @@ int pulseDuration = 500;               // in microseconds, 0.5 ms
 int delayTriggerGroup2_min = 20;        // in ms, first value on range for triggered stimulation in group1, for example 0
 int delayTriggerGroup2_max = 40;        // in ms, last value on range for triggered stimulation in group1 for example 10
 
-int delayTriggerGroup3_min = 0;        // in ms, first value on range for triggered stimulation in group1, for example 0
-int delayTriggerGroup3_max = 0;        // in ms, last value on range for triggered stimulation in group1 for example 10
+int delayTriggerGroup3_min = 40;        // in ms, first value on range for triggered stimulation in group1, for example 0
+int delayTriggerGroup3_max = 60;        // in ms, last value on range for triggered stimulation in group1 for example 10
 
-int delayTriggerGroup4_min = 40;        // in ms, first value on range for triggered stimulation in group1, for example 0
-int delayTriggerGroup4_max = 100;        // in ms, last value on range for triggered stimulation in group1 for example 10
+int delayTriggerGroup4_min = 60;        // in ms, first value on range for triggered stimulation in group1, for example 0
+int delayTriggerGroup4_max = 80;        // in ms, last value on range for triggered stimulation in group1 for example 10
 
 boolean continousStimulation = true;// stimulation no dependent of the behavoiur arduino
 
@@ -171,8 +172,8 @@ void loop() {
         runEpochs(group1_lights[0],group1_lights[1],group1_lights[2],group1_lights[3],group1_lights[4],group1_lights[5],group1_lights[6],group1_lights[7],group1_lights[8],group1_lights[9],group1_lights[10],group1_lights[11],epoch_inter_event_interval,pulseDuration,pulses_per_epoch);
         
         activeGroup2 = true;
-        //activeGroup3 = true;
-        //activeGroup4 = true;
+        activeGroup3 = true;
+        // activeGroup4 = true;
       }
   
       if (activeGroup2 == true && now >=  spikeTime + delayTriggerGroup2){
@@ -190,7 +191,7 @@ void loop() {
       if (activeGroup4 == true && now >=  spikeTime + delayTriggerGroup4){
         runEpochs(group4_lights[0],group4_lights[1],group4_lights[2],group4_lights[3],group4_lights[4],group4_lights[5],group4_lights[6],group4_lights[7],group4_lights[8],group4_lights[9],group4_lights[10],group4_lights[11],epoch_inter_event_interval,pulseDuration,pulses_per_epoch);
         delayTriggerGroup3 = random(delayTriggerGroup3_min,delayTriggerGroup3_max); // 
-        activeGroup3 = false;
+        activeGroup4 = false;
       }
     } else {
       digitalWrite(LED_BUILTIN, LOW);   // turn the LED off   

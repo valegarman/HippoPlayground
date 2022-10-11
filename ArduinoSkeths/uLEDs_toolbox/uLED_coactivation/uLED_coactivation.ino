@@ -49,13 +49,13 @@ Manuel Valero 2022
 */
 
 // settings
-int numberOfGroups = 2; // declare number of groups that will be use
+int numberOfGroups = 3; // declare number of groups that will be use
 
-int group1_lights[] = {1, 0, 0,   0, 0, 0,   0, 1, 0,   0, 0, 0}; // 1 and 8
+int group1_lights[] = {0, 0, 0,   1, 1, 1,   0, 0, 0,   1, 1, 1}; // 1 and 8
 
-int group2_lights[] = {0, 0, 0,   1, 1, 1,   0, 0, 0,   1, 1, 1}; // 4, 5, 6, 10, 11, 12
+int group2_lights[] = {0, 0, 0,   1, 1, 1,   1, 1, 1,   0, 0, 0}; // 4, 5, 6, 10, 11, 12
 
-int group3_lights[] = {0, 0, 0,   1, 1, 1,   0, 0, 0,   1, 1, 1}; // 1 and 8
+int group3_lights[] = {1, 1, 1,   0, 0, 0,   1, 1, 1,   0, 0, 0}; // 1 and 8
 
 int group4_lights[] = {0, 0, 0,   0, 0, 0,   0, 0, 0,   0, 0, 0}; // 1 and 8
 
@@ -127,7 +127,7 @@ void loop() {
 
   if (digitalRead(BlockPin) == HIGH | continousStimulation){
 
-    ledGroup = random(1,3); // random number from 1 to 3, selecting group
+    ledGroup = random(1,numberOfGroups+1); // random number from 1 to 3, selecting group
     digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on   
 
     if        (ledGroup==1){

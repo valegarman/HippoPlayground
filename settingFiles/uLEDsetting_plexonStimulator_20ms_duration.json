@@ -1,0 +1,177 @@
+{
+  "numChannels": 12,
+  "numHeadstages": 1,
+  "logLevel": 1,
+  "quantizeInput": true,
+  "disableDigitalInput": false,
+  "waitForPatternToFinishBeforeStopping": true,
+  "doMode": 0,
+  "channelSelectorModels": [
+    {
+      "GUID": "fb28be6d-cd28-44bb-9a96-d36183fb5633",
+      "name": "S1L1",
+      "channelNumber": 3,
+      "generatorNumber": 3,
+      "portNumber": 0,
+      "DIChannelNumber": 0,
+      "DOChannelNumber": 0,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "e583cdd8-378f-4b22-99f3-ca869e295162",
+      "name": "S1L2",
+      "channelNumber": 4,
+      "generatorNumber": 4,
+      "portNumber": 0,
+      "DIChannelNumber": 1,
+      "DOChannelNumber": 1,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "45522b58-287b-4fbe-9b4d-1fe3838e794b",
+      "name": "S1L3",
+      "channelNumber": 5,
+      "generatorNumber": 5,
+      "portNumber": 0,
+      "DIChannelNumber": 2,
+      "DOChannelNumber": 2,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "1c29c185-8499-4086-ad19-c684018869c8",
+      "name": "S2L1",
+      "channelNumber": 0,
+      "generatorNumber": 0,
+      "portNumber": 0,
+      "DIChannelNumber": 3,
+      "DOChannelNumber": 3,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "296fcb8f-bac3-4d8f-9e88-6bfcec88848f",
+      "name": "S2L2",
+      "channelNumber": 1,
+      "generatorNumber": 1,
+      "portNumber": 0,
+      "DIChannelNumber": 4,
+      "DOChannelNumber": 4,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "f27c0050-a983-41de-93c3-88de4e8687f7",
+      "name": "S2L3",
+      "channelNumber": 2,
+      "generatorNumber": 2,
+      "portNumber": 0,
+      "DIChannelNumber": 5,
+      "DOChannelNumber": 5,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "78feb044-850a-4e3d-b6bc-34f7c1430e53",
+      "name": "S3L1",
+      "channelNumber": 9,
+      "generatorNumber": 9,
+      "portNumber": 0,
+      "DIChannelNumber": 6,
+      "DOChannelNumber": 6,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "35b7d151-6998-4ed1-b7bb-8ebf98537f74",
+      "name": "S3L2",
+      "channelNumber": 10,
+      "generatorNumber": 10,
+      "portNumber": 0,
+      "DIChannelNumber": 7,
+      "DOChannelNumber": 7,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "a3c21e15-081b-40de-863d-ffe35e5707b5",
+      "name": "S3L3",
+      "channelNumber": 11,
+      "generatorNumber": 11,
+      "portNumber": 0,
+      "DIChannelNumber": 8,
+      "DOChannelNumber": 8,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "7fbb9da7-9122-4991-96db-9141cfde80a9",
+      "name": "S4L1",
+      "channelNumber": 6,
+      "generatorNumber": 6,
+      "portNumber": 0,
+      "DIChannelNumber": 9,
+      "DOChannelNumber": 9,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "2ef9095e-62e7-4319-af04-34ce15ef5fa0",
+      "name": "S4L2",
+      "channelNumber": 7,
+      "generatorNumber": 7,
+      "portNumber": 0,
+      "DIChannelNumber": 10,
+      "DOChannelNumber": 10,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    },
+    {
+      "GUID": "e3880c04-2ab3-40ee-9d5f-7eb7eb847c7d",
+      "name": "S4L3",
+      "channelNumber": 8,
+      "generatorNumber": 8,
+      "portNumber": 0,
+      "DIChannelNumber": 11,
+      "DOChannelNumber": 11,
+      "selectedPatternGUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "controlGroup": -1
+    }
+  ],
+  "patterns": [
+    {
+      "patternPrimitiveList": [
+        {
+          "GUID": "ba39fcb9-42df-402d-b203-e5722fc94b9f",
+          "type": 1,
+          "startCurrentInMicroAmps": 0,
+          "endCurrentInMicroAmps": 5.09803915,
+          "durationInMilliseconds": 1,
+          "repetitions": 1
+        },
+        {
+          "GUID": "57ed0242-1628-4b02-af90-cefc687e5036",
+          "type": 0,
+          "startCurrentInMicroAmps": 5.09803915,
+          "endCurrentInMicroAmps": 0,
+          "durationInMilliseconds": 18,
+          "repetitions": 1
+        },
+        {
+          "GUID": "821ec610-36a0-4691-b25e-4e8fa9cc8c86",
+          "type": 1,
+          "startCurrentInMicroAmps": 5.09803915,
+          "endCurrentInMicroAmps": 0,
+          "durationInMilliseconds": 1,
+          "repetitions": 1
+        }
+      ],
+      "repetitions": 1,
+      "delayInMilliseconds": 0,
+      "GUID": "02b3cbaa-e4cd-47e6-8b79-26e2ebc2dc2e",
+      "patternName": "trapezoid"
+    }
+  ]
+}
